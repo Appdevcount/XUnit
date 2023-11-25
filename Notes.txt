@@ -126,8 +126,8 @@ Mocking
     mock.Setup(x=>x.dependentmethod(It.IsAny<string>())).Returns(true);//anyvalueoftype
     mock.Setup(x=>x.dependentmethod(It.Is<string>(n=>n.StartsWith("y")))).Returns(true);//startswithvalue
     mock.Setup(x=>x.dependentmethod(It.IsInRange("a","z",Moq.Range.Inclusive))).Returns(true);//rangevalue
-    //For a dependent object method which returns void, we can use .Callback(()=>{localexpectedobj=inputobj;})
-    mock.Setup(x=>x.dependentmethod(It.IsAny<inputobj>())).Callback((inputobj)=>{localexpectedobj=inputobj;});
+    //For a dependent object method which returns void, we can use .Callback(()=>{localexpectedobj=inputobj;}). and can assert on the callback assignment with expected value
+    mock.Setup(x=>x.dependentmethod(It.IsAny<inputobj>())).Callback<inputobj>((inputobj)=>{localexpectedobj=inputobj;});
     mock.Setup(x=>x.dependentProperty).Returns("123");
     mock.Setup(x=>x.dependentProperty).Returns("123");
 
